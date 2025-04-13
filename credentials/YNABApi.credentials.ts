@@ -1,30 +1,23 @@
 import {
 	IAuthenticateGeneric,
-	ICredentialTestRequest,
 	ICredentialType,
 	INodeProperties,
 } from 'n8n-workflow';
 
-export class HttpBinApi implements ICredentialType {
-	name = 'httpbinApi';
-	displayName = 'HttpBin API';
-	documentationUrl = '<your-docs-url>';
+export class YNABApi implements ICredentialType {
+	name = 'ynabApi';
+	displayName = 'YNAB API';
+	documentationUrl = 'https://api.ynab.com/';
 	properties: INodeProperties[] = [
 		{
-			displayName: 'Token',
+			displayName: 'Personal Access Token',
 			name: 'token',
 			type: 'string',
 			default: '',
 			typeOptions: {
 				password: true,
 			}
-		},
-		{
-			displayName: 'Domain',
-			name: 'domain',
-			type: 'string',
-			default: 'https://httpbin.org',
-		},
+		}
 	];
 
 	// This allows the credential to be used by other parts of n8n
@@ -37,14 +30,6 @@ export class HttpBinApi implements ICredentialType {
 			headers: {
 				Authorization: '={{"Bearer " + $credentials.token}}',
 			},
-		},
-	};
-
-	// The block below tells how this credential can be tested
-	test: ICredentialTestRequest = {
-		request: {
-			baseURL: '={{$credentials?.domain}}',
-			url: '/bearer',
 		},
 	};
 }
