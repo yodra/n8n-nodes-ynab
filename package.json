@@ -10,7 +10,10 @@
   ],
   "license": "MIT",
   "homepage": "https://github.com/yodra/n8n-nodes-ynab#readme",
-  "author": "yodra <yodralopez@gmail.com>",
+  "author": {
+    "name": "yodra",
+    "email": "yodralopez@gmail.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yodra/n8n-nodes-ynab.git"
