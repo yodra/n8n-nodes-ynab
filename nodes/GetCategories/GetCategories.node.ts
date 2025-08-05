@@ -7,8 +7,8 @@ import {
 	NodeExecutionWithMetadata,
 } from 'n8n-workflow';
 import https from 'https';
-import { YNABError } from '../YNABError';
-import { YNABBudgetResponse } from '../YNABBudgetResponse';
+import { YNABError } from '../integrations/YNABError';
+import { YNABCategoriesResponse } from '../integrations/YNABCategoriesResponse';
 
 export class GetCategories implements INodeType {
 	description: INodeTypeDescription = {
@@ -50,7 +50,7 @@ export class GetCategories implements INodeType {
 		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
 			try {
 				const budgetId = this.getNodeParameter('budget_id', itemIndex, '') as string;
-				const response = await new Promise<YNABBudgetResponse>((resolve, reject) => {
+				const response = await new Promise<YNABCategoriesResponse>((resolve, reject) => {
 					const options = {
 						hostname: 'api.ynab.com',
 						path: `/v1/budgets/${budgetId}/categories`,

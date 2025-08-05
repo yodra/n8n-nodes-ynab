@@ -7,8 +7,8 @@ import {
 	NodeExecutionWithMetadata,
 } from 'n8n-workflow';
 import https from 'https';
-import { YNABError } from '../YNABError';
-import { YNABBudgetResponse } from '../YNABBudgetResponse';
+import { YNABError } from '../integrations/YNABError';
+import { YNABBudgetResponse } from '../integrations/YNABBudgetResponse';
 
 export class GetBudgets implements INodeType {
 	description: INodeTypeDescription = {
