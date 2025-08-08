@@ -6,9 +6,7 @@ import {
 	NodeConnectionType,
 	NodeExecutionWithMetadata,
 } from 'n8n-workflow';
-import https from 'https';
-import { YNABError } from '../integrations/YNABError';
-import { YNABBudgetResponse } from '../integrations/YNABBudgetResponse';
+import { IHttpRequestMethods } from 'n8n-workflow/dist/Interfaces';
 
 export class GetBudgets implements INodeType {
 	description: INodeTypeDescription = {
@@ -36,49 +34,20 @@ export class GetBudgets implements INodeType {
 	): Promise<INodeExecutionData[][] | NodeExecutionWithMetadata[][] | null> {
 		const returnData: INodeExecutionData[] = [];
 		const apiKey = await this.getCredentials('ynabApi');
+		const options = {
+			method: 'GET' as IHttpRequestMethods,
+			url: 'https://api.ynab.com/v1/budgets?include_accounts=false',
+			headers: {
+				Authorization: `${apiKey.token ? `Bearer ${apiKey.token}` : ''}`,
+				'Content-Type': 'application/json',
+			},
+			json: true,
+		};
 
 		try {
-			const response = await new Promise<YNABBudgetResponse>((resolve, reject) => {
-				const options = {
-					hostname: 'api.ynab.com',
-					path: '/v1/budgets?include_accounts=false',
-					method: 'GET',
-					headers: {
-						Authorization: `${apiKey.token ? `Bearer ${apiKey.token}` : ''}`,
-						'Content-Type': 'application/json',
-					},
-				};
-
-				const req = https.request(options, (res) => {
-					let data = '';
-
-					res.on('data', (chunk) => {
-						data += chunk;
-					});
-
-					res.on('end', () => {
-						if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
-							resolve(JSON.parse(data));
-						} else {
-							const errorData = JSON.parse(data) as YNABError;
-							reject(
-								new Error(
-									`Error getting budgets: ${errorData.error?.detail || res.statusMessage} / ${apiKey.toString()}`,
-								),
-							);
-						}
-					});
-				});
-
-				req.on('error', (error) => {
-					reject(error);
-				});
-
-				req.end();
-			});
-
+			const response = this.helpers.request(options);
 			returnData.push({
-				json: response,
+				json: { response },
 			});
 		} catch (error) {
 			if (error instanceof Error) {

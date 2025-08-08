@@ -12,6 +12,9 @@ link:
 build:
 	@pnpm run build
 
+clean:
+	@rm -rf node_modules dist pnpm-lock.yaml
+
 release_patch: release
 
 release_minor: build
