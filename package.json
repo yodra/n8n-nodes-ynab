@@ -50,7 +50,10 @@
     "@types/node": "22.14.1",
     "@typescript-eslint/parser": "7.15.0",
     "eslint": "8.56.0",
+    "eslint-config-riot": "1.0.0",
     "eslint-plugin-n8n-nodes-base": "1.16.1",
+    "eslint-scope": "7.2.2",
+    "eslint-visitor-keys": "3.4.3",
     "gulp": "4.0.2",
     "prettier": "3.3.2",
     "typescript": "5.5.3"
@@ -58,12 +61,7 @@
   "bugs": {
     "url": "https://github.com/yodra/n8n-nodes-ynab/issues"
   },
-  "dependencies": {
-    "@types/node-fetch": "2.6.12",
-    "eslint-config-riot": "1.0.0",
-    "eslint-scope": "7.2.2",
-    "eslint-visitor-keys": "3.4.3",
-    "n8n-workflow": "1.48.0",
-    "node-fetch": "2"
+  "peerDependencies": {
+    "n8n-workflow": "1.48.0"
   }
 }
