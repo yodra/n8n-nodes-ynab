@@ -42,7 +42,8 @@
       "dist/credentials/YNABApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/GetBudgets/GetBudgets.node.js"
+      "dist/nodes/GetBudgets/GetBudgets.node.js",
+      "dist/nodes/GetCategories/GetCategories.node.js"
     ]
   },
   "devDependencies": {
