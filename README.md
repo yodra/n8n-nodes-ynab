@@ -1,6 +1,6 @@
 # n8n-nodes-ynab
 
-This is an n8n community node. It lets you use **YNAB** in your n8n workflows.
+This is a n8n community node. It lets you use **YNAB** in your n8n workflows.
 
 **YNAB (You Need A Budget)** is a personal finance tool that helps you manage your money by creating spending plans and understanding where your money goes.
 
@@ -36,11 +36,9 @@ This node uses a **Personal Access Token** for authentication.
 
 ## Compatibility
 
-> ⚠️ _Please complete this section when available._
-
-- Minimum n8n version: _[to be confirmed]_
-- Tested on versions: _[to be confirmed]_
-- Known issues: _None so far_
+- Minimum n8n version: 1.65.2
+- Tested on versions: 1.86.1
+- Known issues: None so far
 
 ## Resources
 

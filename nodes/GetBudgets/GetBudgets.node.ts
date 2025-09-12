@@ -15,6 +15,7 @@ export class GetBudgets implements INodeType {
 		group: ['transform'],
 		version: 1,
 		description: 'YNAB Get Budgets',
+		icon: 'file:../icons/ynab.svg',
 		defaults: {
 			name: 'Get Budgets',
 		},
