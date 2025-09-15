@@ -3,6 +3,7 @@ import {
 	ICredentialType,
 	INodeProperties,
 } from 'n8n-workflow';
+import { Icon } from 'n8n-workflow/dist/Interfaces';
 
 export class YNABApi implements ICredentialType {
 	name = 'ynabApi';
@@ -19,6 +20,7 @@ export class YNABApi implements ICredentialType {
 			}
 		}
 	];
+	icon: Icon = 'file:../../icons/ynab.svg';
 
 	// This allows the credential to be used by other parts of n8n
 	// stating how this credential is injected as part of the request
