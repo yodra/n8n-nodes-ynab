@@ -1,10 +1,10 @@
 import {
-	IExecuteFunctions,
-	INodeExecutionData,
+	IExecuteFunctions, INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
-	NodeConnectionType,
-	NodeExecutionWithMetadata,
+	JsonObject,
+	NodeApiError,
+	NodeConnectionType, NodeExecutionWithMetadata,
 } from 'n8n-workflow';
 import { IHttpRequestMethods } from 'n8n-workflow/dist/Interfaces';
 
@@ -46,15 +46,16 @@ export class GetBudgets implements INodeType {
 		};
 
 		try {
-			const response = this.helpers.request(options);
+			const response = await this.helpers.httpRequestWithAuthentication.call(
+				this,
+				'ynabApi',
+				options,
+			);
 			returnData.push({
 				json: { response },
 			});
 		} catch (error) {
-			if (error instanceof Error) {
-				throw Error(`Error getting budgets: ${error.message}`);
-			}
-			throw error;
+			throw new NodeApiError(this.getNode(), error as JsonObject);
 		}
 
 		return [returnData];

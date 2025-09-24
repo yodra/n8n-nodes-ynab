@@ -3,6 +3,8 @@ import {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
+	JsonObject,
+	NodeApiError,
 	NodeConnectionType,
 	NodeExecutionWithMetadata,
 } from 'n8n-workflow';
@@ -43,7 +45,6 @@ export class GetCategories implements INodeType {
 		this: IExecuteFunctions,
 	): Promise<INodeExecutionData[][] | NodeExecutionWithMetadata[][] | null> {
 		const returnData: INodeExecutionData[] = [];
-		const apiKey = await this.getCredentials('ynabApi');
 		const items = this.getInputData();
 
 		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
@@ -51,23 +52,20 @@ export class GetCategories implements INodeType {
 			const options = {
 				method: 'GET' as IHttpRequestMethods,
 				url: `https://api.ynab.com/v1/budgets/${budgetId}/categories`,
-				headers: {
-					Authorization: `${apiKey.token ? `Bearer ${apiKey.token}` : ''}`,
-					'Content-Type': 'application/json',
-				},
 				json: true,
 			};
 
 			try {
-				const response = this.helpers.request(options);
+				const response = await this.helpers.httpRequestWithAuthentication.call(
+					this,
+					'ynabApi',
+					options,
+				);
 				returnData.push({
 					json: { response },
 				});
 			} catch (error) {
-				if (error instanceof Error) {
-					throw Error(`Error getting budgets: ${error.message}`);
-				}
-				throw error;
+				throw new NodeApiError(this.getNode(), error as JsonObject);
 			}
 		}
 
