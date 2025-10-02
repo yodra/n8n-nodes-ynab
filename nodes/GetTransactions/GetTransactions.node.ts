@@ -17,7 +17,7 @@ export class GetTransactions implements INodeType {
 		group: ['transform'],
 		version: 1,
 		description: 'YNAB Get Transactions',
-		icon: 'file:../../../icons/ynab.svg',
+		icon: 'file:icons/ynab.svg',
 		defaults: {
 			name: 'Get Transactions',
 		},
