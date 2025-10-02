@@ -22,6 +22,7 @@ This node currently supports the following operations with YNAB:
 
 - **Fetch budgets**: Retrieve the list of budgets defined in your YNAB account.
 - **Fetch categories**: Retrieve the list of categories for a budget in your YNAB account.
+- **Fetch transactions**: Retrieve the list of transactions for a budget in your YNAB account.
 
 ## Credentials
 
